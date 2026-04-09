@@ -1,0 +1,40 @@
+2026-03-21 05:37:30,608 42352 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2026-03-21 05:37:30,610 42352 INFO ? odoo: Odoo version 19.0 
+2026-03-21 05:37:30,610 42352 INFO ? odoo: addons paths: _NamespacePath(['C:\\Users\\javie\\Documents\\VYNX trabajo\\odoo\\odoo\\addons', 'C:\\Users\\javie\\AppData\\Local\\OpenERP S.A.\\Odoo\\addons\\19.0', 'c:\\users\\javie\\documents\\vynx trabajo\\odoo\\odoo\\addons', 'c:\\users\\javie\\documents\\vynx trabajo\\odoo\\addons']) 
+2026-03-21 05:37:30,610 42352 INFO ? odoo: database: javi2@default:default 
+2026-03-21 05:37:31,112 42352 INFO carniceria_db odoo.sql_db: Connection to the database failed 
+2026-03-21 05:37:31,112 42352 CRITICAL carniceria_db odoo.service.server: Failed to initialize database `carniceria_db`. 
+Traceback (most recent call last):
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\odoo\service\server.py", line 1544, in preload_registries
+    registry = Registry.new(dbname, update_module=update_module, install_modules=config['init'], upgrade_modules=config['update'], reinit_modules=config['reinit'])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\odoo\tools\func.py", line 88, in locked
+    return func(inst, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\odoo\orm\registry.py", line 164, in new
+    registry.init(db_name)
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\odoo\orm\registry.py", line 301, in init
+    with closing(self.cursor()) as cr:
+                 ^^^^^^^^^^^^^
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\odoo\orm\registry.py", line 1171, in cursor
+    return self._db.cursor()
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\odoo\sql_db.py", line 763, in cursor
+    return Cursor(self.__pool, self.__dbname, self.__dsn)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\odoo\sql_db.py", line 365, in __init__
+    self._cnx: PsycoConnection = pool.borrow(dsn)
+                                 ^^^^^^^^^^^^^^^^
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\odoo\tools\func.py", line 88, in locked
+    return func(inst, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\odoo\sql_db.py", line 687, in borrow
+    result = psycopg2.connect(
+             ^^^^^^^^^^^^^^^^^
+  File "C:\Users\javie\Documents\VYNX trabajo\odoo\.venv\Lib\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  los ordenamientos (collation) con valores collate y ctype diferentes no están soportados en esta plataforma
+
+2026-03-21 05:37:31,115 42352 INFO carniceria_db odoo.service.server: Initiating shutdown 
+2026-03-21 05:37:31,115 42352 INFO carniceria_db odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 

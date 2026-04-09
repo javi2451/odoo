@@ -1,0 +1,320 @@
+﻿.\.venv\Scripts\python.exe : 
+2026-03-16 05:14:45,739 4360 
+WARNING ? odoo.tools.config: 
+missing 
+--http-interface/http_interface, 
+using 0.0.0.0 by default, will 
+change to 127.0.0.1 in 20.0 
+En línea: 1 Carácter: 1
++ .\.venv\Scripts\python.exe 
+odoo-bin -r javi2 -w javi2 
+--addons-path=a ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~
+    + CategoryInfo          : Not 
+   Specified: (2026-03-16 05:1..  
+  ..0.0.1 in 20.0 :String) [],    
+ RemoteException
+    + FullyQualifiedErrorId : Nat 
+   iveCommandError
+ 
+2026-03-16 05:14:45,740 4360 INFO 
+? odoo: Odoo version 19.0 
+2026-03-16 05:14:45,740 4360 INFO 
+? odoo: addons paths: _NamespacePa
+th(['C:\\Users\\javie\\Documents\\
+VYNX 
+trabajo\\odoo\\odoo\\addons', 'C:\
+\Users\\javie\\AppData\\Local\\Ope
+nERP S.A.\\Odoo\\addons\\19.0', 'c
+:\\users\\javie\\documents\\vynx 
+trabajo\\odoo\\addons']) 
+2026-03-16 05:14:45,740 4360 INFO 
+? odoo: database: 
+javi2@default:default 
+2026-03-16 05:14:46,306 4360 INFO 
+odoo odoo.modules.loading: 
+loading 1 modules... 
+2026-03-16 05:14:46,310 4360 INFO 
+odoo odoo.modules.loading: 1 
+modules loaded in 0.00s, 0 
+queries (+0 extra) 
+2026-03-16 05:14:46,336 4360 INFO 
+odoo odoo.modules.loading: 
+updating modules list 
+2026-03-16 05:14:46,340 4360 INFO 
+odoo odoo.addons.base.models.ir_mo
+dule: ALLOW access to 
+module.update_list on [] to user 
+__system__ #1 via n/a 
+2026-03-16 05:14:47,369 4360 INFO 
+odoo odoo.addons.base.models.ir_mo
+dule: ALLOW access to 
+module.button_upgrade on 
+['Plantilla para CarnicerÝa'] to 
+user __system__ #1 via n/a 
+2026-03-16 05:14:47,370 4360 INFO 
+odoo odoo.addons.base.models.ir_mo
+dule: ALLOW access to 
+module.update_list on ['Plantilla 
+para CarnicerÝa'] to user 
+__system__ #1 via n/a 
+2026-03-16 05:14:48,131 4360 INFO 
+odoo odoo.addons.base.models.ir_mo
+dule: ALLOW access to 
+module.button_install on [] to 
+user __system__ #1 via n/a 
+2026-03-16 05:14:48,178 4360 INFO 
+odoo odoo.modules.loading: 
+loading 76 modules... 
+2026-03-16 05:14:49,106 4360 INFO 
+odoo odoo.modules.loading: 
+Loading module 
+carniceria_template (75/76) 
+2026-03-16 05:14:49,305 4360 INFO 
+odoo odoo.registry: module 
+carniceria_template: creating or 
+updating database tables 
+2026-03-16 05:14:49,401 4360 INFO 
+odoo odoo.modules.loading: 
+loading carniceria_template/views/
+product_views.xml 
+2026-03-16 05:14:49,479 4360 INFO 
+odoo odoo.modules.loading: 
+loading carniceria_template/data/p
+roduct_category_data.xml 
+2026-03-16 05:14:49,485 4360 INFO 
+odoo odoo.modules.loading: 
+loading carniceria_template/data/p
+os_config_data.xml 
+2026-03-16 05:14:49,487 4360 
+ERROR odoo 
+odoo.tools.convert.init: Could 
+not eval([(6, 0, 
+[ref('product.list0')])]) for 
+available_pricelist_ids in 
+{'lang': None} 
+2026-03-16 05:14:49,488 4360 
+WARNING odoo 
+odoo.modules.loading: Transient 
+module states were reset 
+2026-03-16 05:14:49,488 4360 
+ERROR odoo odoo.registry: Failed 
+to load registry 
+2026-03-16 05:14:49,488 4360 
+CRITICAL odoo 
+odoo.service.server: Failed to 
+initialize database `odoo`. 
+Traceback (most recent call last):
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\safe_eval.py"
+, line 397, in safe_eval
+    return unsafe_eval(c, 
+globals_dict, None)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "", line 1, in <module>
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 589, in id_get
+    return 
+self.model_id_get(id_str, 
+raise_if_not_found)[1]
+           ^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 593, in model_id_get
+    return self.env['ir.model.data
+']._xmlid_to_res_model_res_id(id_s
+tr, raise_if_not_found=raise_if_no
+t_found)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\addons\base\models\
+ir_model.py", line 2277, in 
+_xmlid_to_res_model_res_id
+    return 
+self._xmlid_lookup(xmlid)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\cache.py", 
+line 98, in lookup
+    return self.lookup(*args, 
+**kwargs)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\cache.py", 
+line 155, in lookup
+    value = self.method(*args, 
+**kwargs)
+            
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\addons\base\models\
+ir_model.py", line 2270, in 
+_xmlid_lookup
+    raise ValueError('External ID 
+not found in the system: %s' % 
+xmlid)
+ValueError: External ID not found 
+in the system: product.list0
+
+During handling of the above 
+exception, another exception 
+occurred:
+
+Traceback (most recent call last):
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 605, in _tag_root
+    f(rec)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 428, in _tag_record
+    f_val = _eval_xml(self, 
+field, env)
+            
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 99, in _eval_xml
+    return safe_eval(a_eval, 
+context)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\safe_eval.py"
+, line 403, in safe_eval
+    raise ValueError('%r while 
+evaluating\n%r' % (e, expr))
+ValueError: ValueError('External 
+ID not found in the system: 
+product.list0') while evaluating
+"[(6, 0, [ref('product.list0')])]"
+
+The above exception was the 
+direct cause of the following 
+exception:
+
+Traceback (most recent call last):
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\service\server.py",
+ line 1544, in preload_registries
+    registry = 
+Registry.new(dbname, 
+update_module=update_module, 
+install_modules=config['init'], 
+upgrade_modules=config['update'], 
+reinit_modules=config['reinit'])
+               ^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX 
+trabajo\odoo\odoo\tools\func.py", 
+line 88, in locked
+    return func(inst, *args, 
+**kwargs)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\orm\registry.py", 
+line 199, in new
+    load_modules(
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\modules\loading.py"
+, line 464, in load_modules
+    load_module_graph(
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\modules\loading.py"
+, line 224, in load_module_graph
+    load_data(env, idref, mode, 
+kind='data', package=package)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\modules\loading.py"
+, line 59, in load_data
+    convert_file(env, 
+package.name, filename, idref, 
+mode, noupdate=kind == 'demo')
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 693, in convert_file
+    convert_xml_import(env, 
+module, fp, idref, mode, noupdate)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 792, in convert_xml_import
+    obj.parse(doc.getroot())
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 663, in parse
+    self._tag_root(de)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 618, in _tag_root
+    raise ParseError('while 
+parsing %s:%s, somewhere 
+inside\n%s' % (
+odoo.tools.convert.ParseError: 
+while parsing file:/c:/users/javie
+/documents/vynx%20trabajo/odoo/add
+ons/carniceria_template/data/pos_c
+onfig_data.xml:3, somewhere inside
+<record 
+id="pos_config_carniceria" 
+model="pos.config">
+        <field 
+name="name">Mostrador 
+CarnicerÝa</field>
+        <field 
+name="module_pos_hr" 
+eval="False"/>
+        <field name="is_posbox" 
+eval="False"/>
+        <field name="iface_tax_inc
+luded">total</field>
+        <field 
+name="available_pricelist_ids" 
+eval="[(6, 0, 
+[ref('product.list0')])]"/>
+    </record>
+2026-03-16 05:14:49,492 4360 INFO 
+odoo odoo.service.server: 
+Initiating shutdown 
+2026-03-16 05:14:49,492 4360 INFO 
+odoo odoo.service.server: Hit 
+CTRL-C again or send a second 
+signal to force the shutdown. 
+2026-03-16 05:14:49,492 4360 INFO 
+odoo odoo.sql_db: ConnectionPool(r
+ead/write;used=0/count=0/max=64): 
+Closed 1 connections  

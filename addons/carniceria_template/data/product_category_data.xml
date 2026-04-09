@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    
+    <!-- Categoría Padre: Cárnicos -->
+    <record id="cat_carnicos_padre" model="product.category">
+        <field name="name">Cárnicos y Desposte</field>
+    </record>
+
+    <!-- Subcategorías por Tipo de Animal -->
+    <record id="cat_carne_res" model="product.category">
+        <field name="name">Vaca / Res</field>
+        <field name="parent_id" ref="cat_carnicos_padre"/>
+    </record>
+
+    <record id="cat_carne_cerdo" model="product.category">
+        <field name="name">Cerdo</field>
+        <field name="parent_id" ref="cat_carnicos_padre"/>
+    </record>
+
+    <record id="cat_carne_pollo" model="product.category">
+        <field name="name">Aves / Pollo</field>
+        <field name="parent_id" ref="cat_carnicos_padre"/>
+    </record>
+
+    <!-- Subcategorías Generales -->
+    <record id="cat_embutidos" model="product.category">
+        <field name="name">Embutidos y Listos</field>
+        <field name="parent_id" ref="cat_carnicos_padre"/>
+    </record>
+    
+    <record id="cat_subproductos" model="product.category">
+        <field name="name">Subproductos (Hueso, Grasa)</field>
+        <field name="parent_id" ref="cat_carnicos_padre"/>
+    </record>
+
+</odoo>

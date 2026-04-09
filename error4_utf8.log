@@ -1,0 +1,240 @@
+﻿.\.venv\Scripts\python.exe : 
+2026-03-21 06:07:54,615 45456 
+WARNING ? odoo.tools.config: 
+missing 
+--http-interface/http_interface, 
+using 0.0.0.0 by default, will 
+change to 127.0.0.1 in 20.0 
+En línea: 1 Carácter: 1
++ .\.venv\Scripts\python.exe 
+odoo-bin -r javi2 -w javi2 
+--addons-path=o ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~
+    + CategoryInfo          : Not 
+   Specified: (2026-03-21 06:0..  
+  ..0.0.1 in 20.0 :String) [],    
+ RemoteException
+    + FullyQualifiedErrorId : Nat 
+   iveCommandError
+ 
+2026-03-21 06:07:54,616 45456 
+INFO ? odoo: Odoo version 19.0 
+2026-03-21 06:07:54,616 45456 
+INFO ? odoo: addons paths: _Namesp
+acePath(['C:\\Users\\javie\\Docume
+nts\\VYNX 
+trabajo\\odoo\\odoo\\addons', 'C:\
+\Users\\javie\\AppData\\Local\\Ope
+nERP S.A.\\Odoo\\addons\\19.0', 'c
+:\\users\\javie\\documents\\vynx 
+trabajo\\odoo\\odoo\\addons', 'c:\
+\users\\javie\\documents\\vynx 
+trabajo\\odoo\\addons']) 
+2026-03-21 06:07:54,616 45456 
+INFO ? odoo: database: 
+javi2@default:default 
+2026-03-21 06:07:55,154 45456 
+INFO odoo odoo.modules.loading: 
+loading 1 modules... 
+2026-03-21 06:07:55,158 45456 
+INFO odoo odoo.modules.loading: 1 
+modules loaded in 0.00s, 0 
+queries (+0 extra) 
+2026-03-21 06:07:55,182 45456 
+INFO odoo odoo.modules.loading: 
+updating modules list 
+2026-03-21 06:07:55,186 45456 
+INFO odoo odoo.addons.base.models.
+ir_module: ALLOW access to 
+module.update_list on [] to user 
+__system__ #1 via n/a 
+2026-03-21 06:07:56,293 45456 
+INFO odoo odoo.addons.base.models.
+ir_module: ALLOW access to 
+module.button_upgrade on 
+['Plantilla para CarnicerÝa'] to 
+user __system__ #1 via n/a 
+2026-03-21 06:07:56,293 45456 
+INFO odoo odoo.addons.base.models.
+ir_module: ALLOW access to 
+module.update_list on ['Plantilla 
+para CarnicerÝa'] to user 
+__system__ #1 via n/a 
+2026-03-21 06:07:57,051 45456 
+INFO odoo odoo.addons.base.models.
+ir_module: ALLOW access to 
+module.button_install on [] to 
+user __system__ #1 via n/a 
+2026-03-21 06:07:57,085 45456 
+INFO odoo odoo.modules.loading: 
+loading 76 modules... 
+2026-03-21 06:07:57,984 45456 
+INFO odoo odoo.modules.loading: 
+Loading module 
+carniceria_template (75/76) 
+2026-03-21 06:07:58,182 45456 
+INFO odoo odoo.registry: module 
+carniceria_template: creating or 
+updating database tables 
+2026-03-21 06:07:58,283 45456 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/securi
+ty/ir.model.access.csv 
+2026-03-21 06:07:58,292 45456 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/data/c
+ompany_config_data.xml 
+2026-03-21 06:07:58,300 45456 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/data/p
+roduct_category_data.xml 
+2026-03-21 06:07:58,306 45456 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/data/p
+os_config_data.xml 
+2026-03-21 06:07:58,315 45456 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/data/s
+tock_warehouse_data.xml 
+2026-03-21 06:07:59,326 45456 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/views/
+product_views.xml 
+2026-03-21 06:07:59,381 45456 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/views/
+carniceria_merma_views.xml 
+2026-03-21 06:07:59,397 45456 
+WARNING odoo 
+odoo.tools.view_validation: <strin
+g>:10:0:ERROR:RELAXNGV:RELAXNG_ERR
+_NOELEM: Expecting an element 
+field, got nothing 
+2026-03-21 06:07:59,398 45456 
+WARNING odoo 
+odoo.tools.view_validation: <strin
+g>:10:0:ERROR:RELAXNGV:RELAXNG_ERR
+_INVALIDATTR: Invalid attribute 
+expand for element group 
+2026-03-21 06:07:59,398 45456 
+WARNING odoo 
+odoo.tools.view_validation: <strin
+g>:2:0:ERROR:RELAXNGV:RELAXNG_ERR_
+EXTRACONTENT: Element search has 
+extra content: field 
+2026-03-21 06:07:59,398 45456 
+WARNING odoo 
+odoo.tools.view_validation: 
+Invalid XML:  Get RNG validator 
+and validate RNG file. 
+2026-03-21 06:07:59,411 45456 
+WARNING odoo 
+odoo.modules.loading: Transient 
+module states were reset 
+2026-03-21 06:07:59,412 45456 
+ERROR odoo odoo.registry: Failed 
+to load registry 
+2026-03-21 06:07:59,412 45456 
+CRITICAL odoo 
+odoo.service.server: Failed to 
+initialize database `odoo`. 
+Traceback (most recent call last):
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\service\server.py",
+ line 1544, in preload_registries
+    registry = 
+Registry.new(dbname, 
+update_module=update_module, 
+install_modules=config['init'], 
+upgrade_modules=config['update'], 
+reinit_modules=config['reinit'])
+               ^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX 
+trabajo\odoo\odoo\tools\func.py", 
+line 88, in locked
+    return func(inst, *args, 
+**kwargs)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\orm\registry.py", 
+line 199, in new
+    load_modules(
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\modules\loading.py"
+, line 464, in load_modules
+    load_module_graph(
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\modules\loading.py"
+, line 224, in load_module_graph
+    load_data(env, idref, mode, 
+kind='data', package=package)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\modules\loading.py"
+, line 59, in load_data
+    convert_file(env, 
+package.name, filename, idref, 
+mode, noupdate=kind == 'demo')
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 693, in convert_file
+    convert_xml_import(env, 
+module, fp, idref, mode, noupdate)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 792, in convert_xml_import
+    obj.parse(doc.getroot())
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 663, in parse
+    self._tag_root(de)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 616, in _tag_root
+    raise ParseError(msg) from 
+None  # Restart with 
+"--log-handler 
+odoo.tools.convert:DEBUG" for 
+complete traceback
+    
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+odoo.tools.convert.ParseError: 
+while parsing file:/c:/users/javie
+/documents/vynx%20trabajo/odoo/add
+ons/carniceria_template/views/carn
+iceria_merma_views.xml:92
+Invalid view 
+carniceria.merma.search 
+definition in carniceria_template/
+views/carniceria_merma_views.xml
+
+View error context:
+'-no context-'
+
+2026-03-21 06:07:59,415 45456 
+INFO odoo odoo.service.server: 
+Initiating shutdown 
+2026-03-21 06:07:59,415 45456 
+INFO odoo odoo.service.server: 
+Hit CTRL-C again or send a second 
+signal to force the shutdown. 
+2026-03-21 06:07:59,415 45456 
+INFO odoo odoo.sql_db: ConnectionP
+ool(read/write;used=0/count=0/max=
+64): Closed 1 connections  

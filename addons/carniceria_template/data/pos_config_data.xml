@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_config_carniceria" model="pos.config">
+        <field name="name">Mostrador Carnicería</field>
+        <field name="module_pos_hr" eval="False"/>
+        <field name="is_posbox" eval="False"/>
+        <field name="iface_tax_included">total</field>
+    </record>
+</odoo>

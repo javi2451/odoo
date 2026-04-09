@@ -1,0 +1,1 @@
+python odoo-bin -r javi2 -w javi2 --addons-path=addons -d odoo -

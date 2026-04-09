@@ -1,0 +1,328 @@
+﻿.\.venv\Scripts\python.exe : 
+2026-03-16 04:37:04,802 28612 
+WARNING ? odoo.tools.config: 
+missing 
+--http-interface/http_interface, 
+using 0.0.0.0 by default, will 
+change to 127.0.0.1 in 20.0 
+En línea: 1 Carácter: 1
++ .\.venv\Scripts\python.exe 
+odoo-bin -r javi2 -w javi2 
+--addons-path=a ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~
+    + CategoryInfo          : Not 
+   Specified: (2026-03-16 04:3..  
+  ..0.0.1 in 20.0 :String) [],    
+ RemoteException
+    + FullyQualifiedErrorId : Nat 
+   iveCommandError
+ 
+2026-03-16 04:37:04,803 28612 
+INFO ? odoo: Odoo version 19.0 
+2026-03-16 04:37:04,804 28612 
+INFO ? odoo: addons paths: _Namesp
+acePath(['C:\\Users\\javie\\Docume
+nts\\VYNX 
+trabajo\\odoo\\odoo\\addons', 'C:\
+\Users\\javie\\AppData\\Local\\Ope
+nERP S.A.\\Odoo\\addons\\19.0', 'c
+:\\users\\javie\\documents\\vynx 
+trabajo\\odoo\\addons']) 
+2026-03-16 04:37:04,804 28612 
+INFO ? odoo: database: 
+javi2@default:default 
+2026-03-16 04:37:05,371 28612 
+INFO odoo odoo.modules.loading: 
+loading 1 modules... 
+2026-03-16 04:37:05,375 28612 
+INFO odoo odoo.modules.loading: 1 
+modules loaded in 0.00s, 0 
+queries (+0 extra) 
+2026-03-16 04:37:05,399 28612 
+INFO odoo odoo.modules.loading: 
+updating modules list 
+2026-03-16 04:37:05,403 28612 
+INFO odoo odoo.addons.base.models.
+ir_module: ALLOW access to 
+module.update_list on [] to user 
+__system__ #1 via n/a 
+2026-03-16 04:37:06,456 28612 
+INFO odoo odoo.addons.base.models.
+ir_module: ALLOW access to 
+module.button_upgrade on 
+['Plantilla para CarnicerÝa'] to 
+user __system__ #1 via n/a 
+2026-03-16 04:37:06,456 28612 
+INFO odoo odoo.addons.base.models.
+ir_module: ALLOW access to 
+module.update_list on ['Plantilla 
+para CarnicerÝa'] to user 
+__system__ #1 via n/a 
+2026-03-16 04:37:07,292 28612 
+INFO odoo odoo.addons.base.models.
+ir_module: ALLOW access to 
+module.button_install on [] to 
+user __system__ #1 via n/a 
+2026-03-16 04:37:07,332 28612 
+INFO odoo odoo.modules.loading: 
+loading 70 modules... 
+2026-03-16 04:37:08,222 28612 
+INFO odoo odoo.modules.loading: 
+Loading module 
+carniceria_template (70/70) 
+2026-03-16 04:37:08,406 28612 
+INFO odoo odoo.registry: module 
+carniceria_template: creating or 
+updating database tables 
+2026-03-16 04:37:08,503 28612 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/views/
+product_views.xml 
+2026-03-16 04:37:08,576 28612 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/data/p
+roduct_category_data.xml 
+2026-03-16 04:37:08,583 28612 
+INFO odoo odoo.modules.loading: 
+loading carniceria_template/demo/p
+roduct_demo.xml 
+2026-03-16 04:37:08,589 28612 
+WARNING odoo 
+odoo.modules.loading: Transient 
+module states were reset 
+2026-03-16 04:37:08,589 28612 
+ERROR odoo odoo.registry: Failed 
+to load registry 
+2026-03-16 04:37:08,589 28612 
+CRITICAL odoo 
+odoo.service.server: Failed to 
+initialize database `odoo`. 
+Traceback (most recent call last):
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 605, in _tag_root
+    f(rec)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 460, in _tag_record
+    record = 
+model._load_records([data], 
+self.mode == 'update')
+             ^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX 
+trabajo\odoo\odoo\orm\models.py", 
+line 5194, in _load_records
+    records = self._load_records_c
+reate([data['values'] for data in 
+to_create])
+              ^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX 
+trabajo\odoo\odoo\orm\models.py", 
+line 5101, in _load_records_create
+    records = 
+self.create(vals_list)
+              
+^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\orm\decorators.py",
+ line 365, in create
+    return method(self, vals_list)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"c:\users\javie\documents\vynx tra
+bajo\odoo\addons\stock\models\prod
+uct.py", line 1091, in create
+    product_templates = 
+super().create(vals_list)
+                        
+^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\orm\decorators.py",
+ line 365, in create
+    return method(self, vals_list)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"c:\users\javie\documents\vynx tra
+bajo\odoo\addons\account\models\pr
+oduct.py", line 182, in create
+    products = 
+super().create(vals_list)
+               
+^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\orm\decorators.py",
+ line 365, in create
+    return method(self, vals_list)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"c:\users\javie\documents\vynx tra
+bajo\odoo\addons\product\models\pr
+oduct_template.py", line 510, in 
+create
+    templates = 
+super(ProductTemplate, 
+self).create(vals_list)
+                ^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\orm\decorators.py",
+ line 365, in create
+    return method(self, vals_list)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"c:\users\javie\documents\vynx tra
+bajo\odoo\addons\mail\models\mail_
+thread.py", line 328, in create
+    threads = super(MailThread, 
+self).create(vals_list)
+              ^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\orm\decorators.py",
+ line 365, in create
+    return method(self, vals_list)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX 
+trabajo\odoo\odoo\orm\models.py", 
+line 4654, in create
+    raise ValueError(f"Invalid 
+field {field_name!r} in 
+{self._name!r}")
+ValueError: Invalid field 
+'uom_po_id' in 'product.template'
+
+The above exception was the 
+direct cause of the following 
+exception:
+
+Traceback (most recent call last):
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\service\server.py",
+ line 1544, in preload_registries
+    registry = 
+Registry.new(dbname, 
+update_module=update_module, 
+install_modules=config['init'], 
+upgrade_modules=config['update'], 
+reinit_modules=config['reinit'])
+               ^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX 
+trabajo\odoo\odoo\tools\func.py", 
+line 88, in locked
+    return func(inst, *args, 
+**kwargs)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\orm\registry.py", 
+line 199, in new
+    load_modules(
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\modules\loading.py"
+, line 464, in load_modules
+    load_module_graph(
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\modules\loading.py"
+, line 224, in load_module_graph
+    load_data(env, idref, mode, 
+kind='data', package=package)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\modules\loading.py"
+, line 59, in load_data
+    convert_file(env, 
+package.name, filename, idref, 
+mode, noupdate=kind == 'demo')
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 693, in convert_file
+    convert_xml_import(env, 
+module, fp, idref, mode, noupdate)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 792, in convert_xml_import
+    obj.parse(doc.getroot())
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 663, in parse
+    self._tag_root(de)
+  File 
+"C:\Users\javie\Documents\VYNX tra
+bajo\odoo\odoo\tools\convert.py", 
+line 618, in _tag_root
+    raise ParseError('while 
+parsing %s:%s, somewhere 
+inside\n%s' % (
+odoo.tools.convert.ParseError: 
+while parsing file:/c:/users/javie
+/documents/vynx%20trabajo/odoo/add
+ons/carniceria_template/demo/produ
+ct_demo.xml:7, somewhere inside
+<record id="demo_media_res" 
+model="product.template">
+        <field name="name">Media 
+Canal de Res</field>
+        <field 
+name="type">consu</field>
+        <field name="categ_id" 
+ref="cat_carne_res"/>
+        <field name="uom_id" 
+ref="uom.product_uom_kgm"/>
+        <field name="uom_po_id" 
+ref="uom.product_uom_kgm"/>
+        <field 
+name="list_price">0.0</field> 
+<!-- No se vende en mostrador 
+generalmente -->
+        <field name="standard_pric
+e">3.50</field> <!-- Costo por KG 
+-->
+        <field 
+name="es_corte_carne" 
+eval="True"/>
+        <field 
+name="tipo_corte">primario</field>
+        <!-- Disponible en POS = 
+Falso -->
+        <field 
+name="available_in_pos" 
+eval="False"/>
+    </record>
+2026-03-16 04:37:08,597 28612 
+INFO odoo odoo.service.server: 
+Initiating shutdown 
+2026-03-16 04:37:08,597 28612 
+INFO odoo odoo.service.server: 
+Hit CTRL-C again or send a second 
+signal to force the shutdown. 
+2026-03-16 04:37:08,597 28612 
+INFO odoo odoo.sql_db: ConnectionP
+ool(read/write;used=0/count=0/max=
+64): Closed 1 connections  

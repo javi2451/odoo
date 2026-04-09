@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!--
+    =====================================================================
+    LISTA DE MATERIALES (BOM) — DESPOSTE / TRANSFORMACIÓN
+    =====================================================================
+    Flujo: Se ingresa una Media Canal de Res (100 kg) y se despostan
+           los siguientes cortes como productos de salida.
+    Esto representa la PREGUNTA 3: Transformación de productos.
+    =====================================================================
+    -->
+
+    <!-- BOM Principal: Media Canal de Res → Cortes de Mostrador -->
+    <record id="bom_desposte_canal_res" model="mrp.bom">
+        <field name="product_tmpl_id" ref="carniceria_template.demo_media_res"/>
+        <field name="product_qty">100.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+        <field name="type">phantom</field>
+        <field name="code">DESPOSTE-RES-001</field>
+    </record>
+
+    <!-- ── Líneas de la BOM (Productos resultantes del desposte) ── -->
+
+    <!-- Ribeye / Ojo de Bife: 15 kg de cada 100 kg ingresados -->
+    <record id="bom_line_ribeye" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_corte_ribeye"/>
+        <field name="product_qty">15.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- Carne Molida: 30 kg -->
+    <record id="bom_line_carne_molida" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_carne_molida"/>
+        <field name="product_qty">30.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- Lomo Fino: 10 kg -->
+    <record id="bom_line_lomo" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_lomo_fino"/>
+        <field name="product_qty">10.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- Osobuco: 8 kg -->
+    <record id="bom_line_osobuco" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_osobuco"/>
+        <field name="product_qty">8.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- Hueso/Subproducto: 12 kg -->
+    <record id="bom_line_hueso" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_hueso_subprod"/>
+        <field name="product_qty">12.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- Merma/Desecho: 25 kg (se gestionan aparte con stock.scrap) -->
+
+</odoo>

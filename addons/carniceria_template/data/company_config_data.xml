@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!--
+        Configuración base de la empresa para carnicería:
+        - Idioma: Español (Perú)
+        - Moneda: Sol Peruano (PEN)
+        - País: Perú
+    -->
+
+    <!-- Funciones de idioma y moneda removidas para evitar errores de restricción de base de datos -->
+    <!-- Crear secuencia para las mermas -->
+    <record id="seq_carniceria_merma" model="ir.sequence">
+        <field name="name">Merma de Carnicería</field>
+        <field name="code">carniceria.merma</field>
+        <field name="prefix">MERMA/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+    </record>
+
+</odoo>

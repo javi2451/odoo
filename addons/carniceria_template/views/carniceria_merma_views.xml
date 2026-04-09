@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    =====================================================================
+    VISTAS: Módulo de Mermas para Carnicería
+    =====================================================================
+    Cubre PREGUNTA 4: Registrar y controlar mermas automáticamente
+    Cubre PREGUNTA 5: Calcula el costo por producto (costo_total)
+    =====================================================================
+    -->
+
+    <!-- ── Vista LISTA (tree) de Mermas ── -->
+    <record id="view_carniceria_merma_tree" model="ir.ui.view">
+        <field name="name">carniceria.merma.tree</field>
+        <field name="model">carniceria.merma</field>
+        <field name="arch" type="xml">
+            <list string="Mermas de Carnicería" decoration-success="state == 'procesado'"
+                  decoration-warning="state == 'confirmado'" decoration-muted="state == 'borrador'">
+                <field name="name"/>
+                <field name="fecha"/>
+                <field name="product_id" string="Producto"/>
+                <field name="tipo_merma"/>
+                <field name="cantidad_kg" string="Kg Perdidos"/>
+                <field name="costo_unitario" string="Costo/Kg (S/.)"/>
+                <field name="costo_total" string="Costo Total (S/.)" sum="Total S/."/>
+                <field name="location_id" string="Local"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'procesado'"
+                       decoration-warning="state == 'confirmado'"
+                       decoration-info="state == 'borrador'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ── Vista FORMULARIO (form) de Mermas ── -->
+    <record id="view_carniceria_merma_form" model="ir.ui.view">
+        <field name="name">carniceria.merma.form</field>
+        <field name="model">carniceria.merma</field>
+        <field name="arch" type="xml">
+            <form string="Registro de Merma">
+                <header>
+                    <button name="action_confirmar" string="✔ Confirmar Merma"
+                            type="object" class="btn-primary"
+                            invisible="state != 'borrador'"/>
+                    <button name="action_procesar_inventario"
+                            string="📦 Procesar en Inventario"
+                            type="object" class="btn-warning"
+                            invisible="state != 'confirmado'"/>
+                    <button name="action_ver_desecho"
+                            string="🔍 Ver Desecho en Inventario"
+                            type="object"
+                            invisible="state != 'procesado'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="borrador,confirmado,procesado"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Información del Producto">
+                            <field name="product_id"/>
+                            <field name="cantidad_kg"/>
+                            <field name="tipo_merma"/>
+                        </group>
+                        <group string="Ubicación y Costos">
+                            <field name="fecha"/>
+                            <field name="location_id"/>
+                            <field name="costo_unitario" readonly="1"/>
+                            <field name="costo_total" readonly="1"
+                                   widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Observaciones">
+                            <field name="observacion" placeholder="Describe la causa de la merma..."/>
+                        </page>
+                        <page string="Desecho en Inventario" invisible="state != 'procesado'">
+                            <field name="scrap_id" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ── Vista BÚSQUEDA (search) de Mermas ── -->
+    <record id="view_carniceria_merma_search" model="ir.ui.view">
+        <field name="name">carniceria.merma.search</field>
+        <field name="model">carniceria.merma</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="product_id"/>
+                <filter name="filter_borrador" string="Borradores" domain="[('state','=','borrador')]"/>
+                <filter name="filter_confirmado" string="Confirmados" domain="[('state','=','confirmado')]"/>
+                <filter name="filter_procesado" string="Procesados" domain="[('state','=','procesado')]"/>
+                <separator/>
+                <filter name="filter_desposte" string="Por Desposte" domain="[('tipo_merma','=','desposte')]"/>
+                <filter name="filter_vencimiento" string="Por Vencimiento" domain="[('tipo_merma','=','vencimiento')]"/>
+                <separator/>
+                <filter name="group_product" string="Agrupar por Producto" context="{'group_by':'product_id'}"/>
+                <filter name="group_tipo" string="Agrupar por Tipo" context="{'group_by':'tipo_merma'}"/>
+                <filter name="group_local" string="Agrupar por Local" context="{'group_by':'location_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ── Acción de ventana para Mermas ── -->
+    <record id="action_carniceria_merma" model="ir.actions.act_window">
+        <field name="name">🩸 Control de Mermas</field>
+        <field name="res_model">carniceria.merma</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_filter_borrador': 0}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Sin mermas registradas aún!
+            </p>
+            <p>
+                Registra aquí las pérdidas de peso por desposte, vencimiento o daño.
+                El sistema calcula automáticamente el costo imputado.
+            </p>
+        </field>
+    </record>
+
+</odoo>

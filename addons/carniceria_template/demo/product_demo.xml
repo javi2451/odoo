@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <!-- ============================================================= -->
+    <!-- CATÁLOGO DEMO — CARNICERÍA                                     -->
+    <!-- NOTA: uom_po_id fue eliminado en Odoo 19. Se usa solo uom_id. -->
+    <!-- ============================================================= -->
+
+    <!-- Producto primario: Media Canal de Res (para desposte) -->
+    <record id="demo_media_res" model="product.template">
+        <field name="name">Media Canal de Res</field>
+        <field name="type">product</field>
+        <field name="categ_id" ref="cat_carne_res"/>
+        <field name="uom_id" ref="uom.product_uom_kgm"/>
+        <field name="list_price">0.0</field>
+        <field name="standard_price">9.50</field>
+        <field name="es_corte_carne" eval="True"/>
+        <field name="tipo_corte">primario</field>
+        <field name="available_in_pos" eval="False"/>
+    </record>
+
+    <!-- Ribeye -->
+    <record id="demo_corte_ribeye" model="product.template">
+        <field name="name">Corte Ribeye (Ojo de Bife)</field>
+        <field name="type">product</field>
+        <field name="categ_id" ref="cat_carne_res"/>
+        <field name="uom_id" ref="uom.product_uom_kgm"/>
+        <field name="list_price">65.00</field>
+        <field name="standard_price">38.00</field>
+        <field name="es_corte_carne" eval="True"/>
+        <field name="tipo_corte">secundario</field>
+        <field name="dias_maduracion">21</field>
+        <field name="available_in_pos" eval="True"/>
+        <field name="to_weight" eval="True"/>
+    </record>
+
+    <!-- Lomo Fino -->
+    <record id="demo_lomo_fino" model="product.template">
+        <field name="name">Lomo Fino</field>
+        <field name="type">product</field>
+        <field name="categ_id" ref="cat_carne_res"/>
+        <field name="uom_id" ref="uom.product_uom_kgm"/>
+        <field name="list_price">75.00</field>
+        <field name="standard_price">45.00</field>
+        <field name="es_corte_carne" eval="True"/>
+        <field name="tipo_corte">secundario</field>
+        <field name="dias_maduracion">14</field>
+        <field name="available_in_pos" eval="True"/>
+        <field name="to_weight" eval="True"/>
+    </record>
+
+    <!-- Osobuco -->
+    <record id="demo_osobuco" model="product.template">
+        <field name="name">Osobuco (Hueso con Carne)</field>
+        <field name="type">product</field>
+        <field name="categ_id" ref="cat_carne_res"/>
+        <field name="uom_id" ref="uom.product_uom_kgm"/>
+        <field name="list_price">28.00</field>
+        <field name="standard_price">14.00</field>
+        <field name="es_corte_carne" eval="True"/>
+        <field name="tipo_corte">secundario</field>
+        <field name="available_in_pos" eval="True"/>
+        <field name="to_weight" eval="True"/>
+    </record>
+
+    <!-- Carne Molida -->
+    <record id="demo_carne_molida" model="product.template">
+        <field name="name">Carne Molida Especial 80/20</field>
+        <field name="type">product</field>
+        <field name="categ_id" ref="cat_carne_res"/>
+        <field name="uom_id" ref="uom.product_uom_kgm"/>
+        <field name="list_price">22.00</field>
+        <field name="standard_price">13.00</field>
+        <field name="es_corte_carne" eval="True"/>
+        <field name="tipo_corte">secundario</field>
+        <field name="available_in_pos" eval="True"/>
+        <field name="to_weight" eval="True"/>
+    </record>
+
+    <!-- Pollo Entero -->
+    <record id="demo_pollo_entero" model="product.template">
+        <field name="name">Pollo Entero</field>
+        <field name="type">product</field>
+        <field name="categ_id" ref="cat_carne_pollo"/>
+        <field name="uom_id" ref="uom.product_uom_kgm"/>
+        <field name="list_price">12.50</field>
+        <field name="standard_price">8.00</field>
+        <field name="es_corte_carne" eval="True"/>
+        <field name="tipo_corte">primario</field>
+        <field name="available_in_pos" eval="True"/>
+        <field name="to_weight" eval="True"/>
+    </record>
+
+    <!-- Hueso / Subproducto -->
+    <record id="demo_hueso_subprod" model="product.template">
+        <field name="name">Hueso para Sopa (Subproducto)</field>
+        <field name="type">product</field>
+        <field name="categ_id" ref="cat_carne_res"/>
+        <field name="uom_id" ref="uom.product_uom_kgm"/>
+        <field name="list_price">5.00</field>
+        <field name="standard_price">2.00</field>
+        <field name="es_corte_carne" eval="True"/>
+        <field name="tipo_corte">subproducto</field>
+        <field name="available_in_pos" eval="True"/>
+        <field name="to_weight" eval="True"/>
+    </record>
+
+</odoo>

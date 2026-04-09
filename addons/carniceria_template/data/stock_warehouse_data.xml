@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!--
+    =====================================================================
+    ALMACENES Y PUNTOS DE VENTA DEMO
+    =====================================================================
+    Cubre PREGUNTA 7: Inventario en tiempo real entre locales
+    Cubre PREGUNTA 8: Traslados de stock entre puntos
+    =====================================================================
+    -->
+
+    <!-- Almacén 1: Frigorífico / Central -->
+    <record id="warehouse_frigorifico" model="stock.warehouse">
+        <field name="name">Frigorífico Central</field>
+        <field name="code">FRIG</field>
+    </record>
+
+    <!-- Almacén 2: Local de Venta 1 (Mostrador) -->
+    <record id="warehouse_local1" model="stock.warehouse">
+        <field name="name">Local Mostrador 1</field>
+        <field name="code">LOC1</field>
+    </record>
+
+</odoo>
