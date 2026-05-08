@@ -4,63 +4,153 @@
     =====================================================================
     LISTA DE MATERIALES (BOM) — DESPOSTE / TRANSFORMACIÓN
     =====================================================================
-    Flujo: Se ingresa una Media Canal de Res (100 kg) y se despostan
-           los siguientes cortes como productos de salida.
-    Esto representa la PREGUNTA 3: Transformación de productos.
+    Flujo real:
+      📦 Canal de Res (100 kg) en Frigorífico
+          ↓ Traslado a cada PV
+          🔪 Desposte en PV → 13 cortes (90 kg) + 10 kg merma
+
+    TIPO BOM: "normal" (no phantom)
+      → Permite crear Órdenes de Desmontaje (Unbuild)
+      → Consumo correcto de la Canal → Salida de los cortes
+
+    Proporciones por cada 100 kg de canal:
+      Ribeye        : 10 kg
+      Lomo Fino     :  7 kg
+      Churrasco     :  8 kg
+      Costilla      : 10 kg
+      Asado de Tira :  6 kg
+      Bife Angosto  :  5 kg
+      Bistec        :  5 kg
+      Osobuco       :  6 kg
+      Tapa de Cuadril:  5 kg
+      Marucha       :  5 kg
+      Carne con Hueso:  5 kg
+      Carne Molida  : 12 kg
+      Hueso/Subprod :  6 kg
+      ──────────────────────
+      Subtotal cortes: 90 kg
+      Merma (10%)   : 10 kg ← Registrar con carniceria.merma
+      Total         :100 kg
     =====================================================================
     -->
 
-    <!-- BOM Principal: Media Canal de Res → Cortes de Mostrador -->
+    <!-- BOM Principal: Canal de Res → Cortes de Mostrador -->
     <record id="bom_desposte_canal_res" model="mrp.bom">
         <field name="product_tmpl_id" ref="carniceria_template.demo_media_res"/>
         <field name="product_qty">100.0</field>
         <field name="product_uom_id" ref="uom.product_uom_kgm"/>
-        <field name="type">phantom</field>
+        <field name="type">normal</field>
         <field name="code">DESPOSTE-RES-001</field>
     </record>
 
     <!-- ── Líneas de la BOM (Productos resultantes del desposte) ── -->
 
-    <!-- Ribeye / Ojo de Bife: 15 kg de cada 100 kg ingresados -->
+    <!-- 1. Ribeye: 10 kg -->
     <record id="bom_line_ribeye" model="mrp.bom.line">
         <field name="bom_id" ref="bom_desposte_canal_res"/>
         <field name="product_id" ref="carniceria_template.demo_corte_ribeye"/>
-        <field name="product_qty">15.0</field>
-        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
-    </record>
-
-    <!-- Carne Molida: 30 kg -->
-    <record id="bom_line_carne_molida" model="mrp.bom.line">
-        <field name="bom_id" ref="bom_desposte_canal_res"/>
-        <field name="product_id" ref="carniceria_template.demo_carne_molida"/>
-        <field name="product_qty">30.0</field>
-        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
-    </record>
-
-    <!-- Lomo Fino: 10 kg -->
-    <record id="bom_line_lomo" model="mrp.bom.line">
-        <field name="bom_id" ref="bom_desposte_canal_res"/>
-        <field name="product_id" ref="carniceria_template.demo_lomo_fino"/>
         <field name="product_qty">10.0</field>
         <field name="product_uom_id" ref="uom.product_uom_kgm"/>
     </record>
 
-    <!-- Osobuco: 8 kg -->
-    <record id="bom_line_osobuco" model="mrp.bom.line">
+    <!-- 2. Lomo Fino: 7 kg -->
+    <record id="bom_line_lomo" model="mrp.bom.line">
         <field name="bom_id" ref="bom_desposte_canal_res"/>
-        <field name="product_id" ref="carniceria_template.demo_osobuco"/>
+        <field name="product_id" ref="carniceria_template.demo_lomo_fino"/>
+        <field name="product_qty">7.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- 3. Churrasco: 8 kg -->
+    <record id="bom_line_churrasco" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_churrasco"/>
         <field name="product_qty">8.0</field>
         <field name="product_uom_id" ref="uom.product_uom_kgm"/>
     </record>
 
-    <!-- Hueso/Subproducto: 12 kg -->
-    <record id="bom_line_hueso" model="mrp.bom.line">
+    <!-- 4. Costilla de Res: 10 kg -->
+    <record id="bom_line_costilla" model="mrp.bom.line">
         <field name="bom_id" ref="bom_desposte_canal_res"/>
-        <field name="product_id" ref="carniceria_template.demo_hueso_subprod"/>
+        <field name="product_id" ref="carniceria_template.demo_costilla"/>
+        <field name="product_qty">10.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- 5. Asado de Tira: 6 kg -->
+    <record id="bom_line_asado" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_asado_tira"/>
+        <field name="product_qty">6.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- 6. Bife Angosto: 5 kg -->
+    <record id="bom_line_bife" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_bife_angosto"/>
+        <field name="product_qty">5.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- 7. Bistec: 5 kg -->
+    <record id="bom_line_bistec" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_bistec"/>
+        <field name="product_qty">5.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- 8. Osobuco: 6 kg -->
+    <record id="bom_line_osobuco" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_osobuco"/>
+        <field name="product_qty">6.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- 9. Tapa de Cuadril: 5 kg -->
+    <record id="bom_line_tapa" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_tapa_cuadril"/>
+        <field name="product_qty">5.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- 10. Marucha (Aguja): 5 kg -->
+    <record id="bom_line_marucha" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_marucha"/>
+        <field name="product_qty">5.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- 11. Carne con Hueso: 5 kg -->
+    <record id="bom_line_carne_hueso" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_carne_con_hueso"/>
+        <field name="product_qty">5.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- 12. Carne Molida: 12 kg -->
+    <record id="bom_line_carne_molida" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_carne_molida"/>
         <field name="product_qty">12.0</field>
         <field name="product_uom_id" ref="uom.product_uom_kgm"/>
     </record>
 
-    <!-- Merma/Desecho: 25 kg (se gestionan aparte con stock.scrap) -->
+    <!-- 13. Hueso / Subproducto: 6 kg -->
+    <record id="bom_line_hueso" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_desposte_canal_res"/>
+        <field name="product_id" ref="carniceria_template.demo_hueso_subprod"/>
+        <field name="product_qty">6.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_kgm"/>
+    </record>
+
+    <!-- ── MERMA (10 kg) ── -->
+    <!-- Los 10 kg de merma se registran por separado usando el módulo
+         carniceria.merma → action_procesar_inventario() → stock.scrap -->
 
 </odoo>

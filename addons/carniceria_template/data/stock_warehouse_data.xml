@@ -15,10 +15,16 @@
         <field name="code">FRIG</field>
     </record>
 
-    <!-- Almacén 2: Local de Venta 1 (Mostrador) -->
+    <!-- Almacén 2: Local de Venta 1 -->
     <record id="warehouse_local1" model="stock.warehouse">
         <field name="name">Local Mostrador 1</field>
         <field name="code">LOC1</field>
+    </record>
+
+    <!-- Almacén 3: Local de Venta 2 -->
+    <record id="warehouse_local2" model="stock.warehouse">
+        <field name="name">Local Mostrador 2</field>
+        <field name="code">LOC2</field>
     </record>
 
 </odoo>

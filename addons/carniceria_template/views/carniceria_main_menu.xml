@@ -2,21 +2,14 @@
 <odoo>
     <!--
     =====================================================================
-    MENÚ PRINCIPAL — PLANTILLA CARNICERÍA 🥩
+    MENÚ PRINCIPAL — PLANTILLA CARNICERÍA 🥩  (v1.2 - Compatible Odoo 19)
     =====================================================================
-    Crea un menú raíz propio para que el usuario acceda únicamente
-    a las funciones relevantes para una carnicería, sin confundirse
-    con los menús genéricos de Odoo.
-
-    Funciones cubiertas:
-      Pregunta 1 → Idioma/Moneda: se configura por datos
-      Pregunta 2 → Compras por Kg
-      Pregunta 3 → Desposte (Fabricación)
-      Pregunta 4 → Mermas
-      Pregunta 5 → Costo por producto (Inventario/Valoración)
-      Pregunta 6 → Rentabilidad (Informes POS y Ventas)
-      Pregunta 7 → Inventario multi-almacén
-      Pregunta 8 → Traslados entre locales
+    IMPORTANTE: Solo se usan actions verificadas en Odoo 19.
+    Actions removidas por no existir en v19:
+      ✗ stock.action_stock_inventory      (removido en v17+)
+      ✗ purchase.res_partner_action_supplier (removido en v17+)
+      ✗ sale.action_order_report_all      (cambiado en v17+)
+      ✗ point_of_sale.action_report_pos_order_all (cambiado en v17+)
     =====================================================================
     -->
 
@@ -27,60 +20,69 @@
         id="menu_carniceria_root"
         name="🥩 Carnicería"
         sequence="1"
-        web_icon="carniceria_template,static/description/icon.png"/>
+        web_icon="carniceria_template,static/description/icon.png"
+        groups="stock.group_stock_manager"/>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  1. COMPRAS POR PESO (Pregunta 2)          -->
-    <!-- ══════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!--  1. COMPRA Y FAENA                                         -->
+    <!-- ══════════════════════════════════════════════════════════ -->
     <menuitem
-        id="menu_carniceria_compras"
-        name="🛒 Compras por Kg"
+        id="menu_carniceria_compra_faena"
+        name="🐄 Compra y Faena"
         parent="menu_carniceria_root"
         sequence="10"/>
 
-    <!-- Órdenes de Compra -->
+    <!-- Órdenes de Compra de Ganado en Pie -->
     <menuitem
         id="menu_carniceria_ordenes_compra"
-        name="Órdenes de Compra"
-        parent="menu_carniceria_compras"
+        name="🛒 Órdenes de Compra (Ganado)"
+        parent="menu_carniceria_compra_faena"
         action="purchase.purchase_rfq"
         sequence="11"/>
 
-    <!-- Recepción de Canales (Llegada al frigorífico) -->
+    <!-- Registro de Faena / Beneficio en Camal -->
     <menuitem
-        id="menu_carniceria_recepcion"
-        name="Recepción de Canales"
-        parent="menu_carniceria_compras"
-        action="stock.action_picking_tree_all"
+        id="menu_carniceria_faena"
+        name="⚖️ Registro de Faena (Camal)"
+        parent="menu_carniceria_compra_faena"
+        action="carniceria_template.action_carniceria_faena"
         sequence="12"/>
 
+    <!-- Recepción de canales (llegada al frigorífico) -->
+    <menuitem
+        id="menu_carniceria_recepcion"
+        name="📦 Recepción en Frigorífico"
+        parent="menu_carniceria_compra_faena"
+        action="stock.action_picking_tree_all"
+        sequence="13"/>
+
     <!-- ══════════════════════════════════════════ -->
-    <!--  2. DESPOSTE / TRANSFORMACIÓN (Pregunta 3) -->
+    <!--  2. DESPOSTE / TRANSFORMACIÓN EN PV        -->
     <!-- ══════════════════════════════════════════ -->
     <menuitem
         id="menu_carniceria_desposte"
-        name="🪓 Desposte"
+        name="🪓 Desposte en PV"
         parent="menu_carniceria_root"
         sequence="20"/>
 
-    <!-- Órdenes de Producción (Desposte) -->
+    <!-- Órdenes de Desmontaje (Unbuild) — Desposte real -->
     <menuitem
-        id="menu_carniceria_ordenes_produccion"
-        name="Nuevos Despostes (Órdenes de Desmonte)"
+        id="menu_carniceria_unbuild"
+        name="🔪 Nuevo Desposte (Desmontaje)"
         parent="menu_carniceria_desposte"
         action="mrp.mrp_unbuild"
         sequence="21"/>
 
-    <!-- Listas de Materiales (BOM) -->
+    <!-- Listas de Materiales (BOM) — Recetas de desposte -->
     <menuitem
         id="menu_carniceria_bom"
-        name="Recetas de Desposte (BOM)"
+        name="📋 Recetas de Desposte (BOM)"
         parent="menu_carniceria_desposte"
         action="mrp.mrp_bom_form_action"
         sequence="22"/>
 
     <!-- ══════════════════════════════════════════ -->
-    <!--  3. MERMAS (Pregunta 4)                    -->
+    <!--  3. MERMAS                                 -->
     <!-- ══════════════════════════════════════════ -->
     <menuitem
         id="menu_carniceria_mermas"
@@ -89,24 +91,24 @@
         action="carniceria_template.action_carniceria_merma"
         sequence="30"/>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  4. INVENTARIO MULTI-ALMACÉN (Preguntas 5,7,8) -->
-    <!-- ══════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  4. INVENTARIO MULTI-ALMACÉN                           -->
+    <!-- ══════════════════════════════════════════════════════ -->
     <menuitem
         id="menu_carniceria_inventario"
         name="📦 Inventario"
         parent="menu_carniceria_root"
         sequence="40"/>
 
-    <!-- Stock actual por local -->
+    <!-- Stock actual en tiempo real por local -->
     <menuitem
         id="menu_carniceria_stock_actual"
-        name="Stock Actual por Local"
+        name="📊 Stock en Tiempo Real (por Local)"
         parent="menu_carniceria_inventario"
         action="stock.action_view_quants"
         sequence="41"/>
 
-    <!-- Traslados entre locales (Pregunta 8) -->
+    <!-- Traslados entre locales -->
     <menuitem
         id="menu_carniceria_traslados"
         name="🚚 Traslados entre Locales"
@@ -114,64 +116,79 @@
         action="stock.action_picking_tree_all"
         sequence="42"/>
 
-    <!-- Valoración de Inventario (Odoo 19: requiere módulo específico no presente por defecto)
-    <menuitem
-        id="menu_carniceria_valoracion"
-        name="💰 Valoración de Inventario"
-        parent="menu_carniceria_inventario"
-        action="stock_account.stock_valuation_layer_action"
-        sequence="43"/>
-    -->
-
-    <!-- ══════════════════════════════════════════ -->
-    <!--  5. PUNTO DE VENTA / MOSTRADOR (POS)       -->
-    <!-- ══════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <!--  5. PUNTO DE VENTA / MOSTRADOR (POS)              -->
+    <!-- ══════════════════════════════════════════════════ -->
     <menuitem
         id="menu_carniceria_pos"
         name="🏪 Mostrador / TPV"
         parent="menu_carniceria_root"
         sequence="50"/>
 
-    <!-- Sesiones de TPV -->
+    <!-- Dashboard TPV (Aquí se ven los 5 locales) -->
     <menuitem
         id="menu_carniceria_pos_sesiones"
-        name="Abrir Mostrador"
+        name="Tablero de Mostradores"
         parent="menu_carniceria_pos"
-        action="point_of_sale.action_pos_pos_form"
+        action="point_of_sale.action_pos_config_kanban"
         sequence="51"/>
 
-    <!-- Productos disponibles en TPV -->
+    <!-- Productos habilitados en el mostrador -->
     <menuitem
         id="menu_carniceria_pos_productos"
-        name="Productos del Mostrador"
+        name="🥩 Productos del Mostrador"
         parent="menu_carniceria_pos"
         action="point_of_sale.product_template_action_pos_product"
         sequence="52"/>
 
-    <!-- ══════════════════════════════════════════ -->
-    <!--  6. RENTABILIDAD E INFORMES (Pregunta 6)   -->
-    <!-- ══════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!--  6. INFORMES Y RESULTADO                                   -->
+    <!-- ══════════════════════════════════════════════════════════ -->
     <menuitem
         id="menu_carniceria_informes"
-        name="📊 Rentabilidad e Informes"
+        name="📈 Informes y Resultado"
         parent="menu_carniceria_root"
         sequence="60"/>
 
-    <!-- Informe de ventas POS -->
+    <!-- Reporte de Mermas -->
     <menuitem
-        id="menu_carniceria_informe_pos"
-        name="Ventas por Mostrador"
+        id="menu_carniceria_informe_mermas"
+        name="🩸 Reporte de Mermas"
         parent="menu_carniceria_informes"
-        action="point_of_sale.action_report_pos_order_all"
+        action="carniceria_template.action_carniceria_merma"
         sequence="61"/>
 
-    <!-- Informe de ventas general -->
+    <!-- Historial de Faenas y Costos -->
     <menuitem
-        id="menu_carniceria_informe_ventas"
-        name="Análisis de Ventas"
+        id="menu_carniceria_informe_faenas"
+        name="⚖️ Historial de Faenas (Costos)"
         parent="menu_carniceria_informes"
-        action="sale.action_order_report_all"
+        action="carniceria_template.action_carniceria_faena"
         sequence="62"/>
+
+    <!-- Órdenes de Venta del Punto de Venta (Boletas / Tickets) -->
+    <menuitem
+        id="menu_carniceria_informe_pos_ordenes"
+        name="🏪 Órdenes de Venta (POS)"
+        parent="menu_carniceria_informes"
+        action="point_of_sale.action_pos_pos_form"
+        sequence="63"/>
+
+    <!-- Análisis de ventas del POS (reportes con gráficas) -->
+    <menuitem
+        id="menu_carniceria_informe_pos_ventas"
+        name="📊 Análisis de Ventas (POS)"
+        parent="menu_carniceria_informes"
+        action="point_of_sale.action_report_pos_order_all"
+        sequence="64"/>
+
+    <!-- Stock en tiempo real (acceso rápido desde informes) -->
+    <menuitem
+        id="menu_carniceria_informe_stock"
+        name="📦 Stock en Tiempo Real"
+        parent="menu_carniceria_informes"
+        action="stock.action_view_quants"
+        sequence="65"/>
 
     <!-- ══════════════════════════════════════════ -->
     <!--  7. CONFIGURACIÓN DEL SISTEMA              -->
@@ -185,7 +202,7 @@
     <!-- Catálogo de productos cárnicos -->
     <menuitem
         id="menu_carniceria_productos"
-        name="Catálogo de Carnes"
+        name="🥩 Catálogo de Carnes"
         parent="menu_carniceria_config"
         action="product.product_template_action_all"
         sequence="100"/>
@@ -193,7 +210,7 @@
     <!-- Categorías de carnes -->
     <menuitem
         id="menu_carniceria_categorias"
-        name="Categorías de Productos"
+        name="📂 Categorías de Productos"
         parent="menu_carniceria_config"
         action="product.product_category_action_form"
         sequence="101"/>

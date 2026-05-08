@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      # Mapeamos la raíz local a /opt/odoo para que los cambios en desarrollo se vean en tiempo real sin reconstruir
+      - ..:/opt/odoo
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo_super_secret_password   # Contraseña de la Base de Datos
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo_super_secret_password
+      - POSTGRES_USER=odoo
+    volumes:
+      # Un volumen persistente para que la base de datos nunca se borre
+      - odoo-db-data:/var/lib/postgresql/data
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:

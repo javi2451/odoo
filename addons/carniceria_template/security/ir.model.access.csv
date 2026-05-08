@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_carniceria_merma_user,carniceria.merma.user,model_carniceria_merma,base.group_user,1,1,1,0
 access_carniceria_merma_manager,carniceria.merma.manager,model_carniceria_merma,stock.group_stock_manager,1,1,1,1
+access_carniceria_faena_user,carniceria.faena.user,model_carniceria_faena,base.group_user,1,1,1,0
+access_carniceria_faena_manager,carniceria.faena.manager,model_carniceria_faena,stock.group_stock_manager,1,1,1,1

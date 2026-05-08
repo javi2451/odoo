@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    =====================================================================
+    VISTAS: Registro de Faena / Beneficio en Camal
+    =====================================================================
+    Flujo cubierto:
+      🐄 Compra ganado → 🚚 Traslado a camal → ⚖️ Faena → 📦 Ingreso inventario
+    Al validar: actualiza standard_price (AVCO) + crea recepción en frigorífico
+    =====================================================================
+    -->
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- Vista FORMULARIO (form) de Faena                          -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <record id="view_carniceria_faena_form" model="ir.ui.view">
+        <field name="name">carniceria.faena.form</field>
+        <field name="model">carniceria.faena</field>
+        <field name="arch" type="xml">
+            <form string="Registro de Faena / Camal">
+                <header>
+                    <!-- Botón: Confirmar (desde Borrador) -->
+                    <button name="action_confirmar"
+                            string="✔ Confirmar Faena"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state != 'borrador'"/>
+                    <!-- Botón: Validar (actualiza AVCO + crea recepción) -->
+                    <button name="action_validar"
+                            string="⚖️ Validar e Ingresar al Frigorífico"
+                            type="object"
+                            class="btn-warning"
+                            invisible="state != 'confirmado'"/>
+                    <!-- Botón: Ver recepción generada -->
+                    <button name="action_ver_recepcion"
+                            string="📦 Ver Recepción en Inventario"
+                            type="object"
+                            invisible="state != 'validado'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="borrador,confirmado,validado"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <!-- Grupo 1: Información principal -->
+                    <group>
+                        <group string="📅 Datos Generales">
+                            <field name="fecha"/>
+                            <field name="proveedor_camal_id"/>
+                            <field name="purchase_order_id"/>
+                        </group>
+                        <group string="🐄 Ganado en Pie">
+                            <field name="cantidad_cabezas"/>
+                            <field name="peso_vivo_total_kg"/>
+                            <field name="costo_ganado_total"/>
+                        </group>
+                    </group>
+
+                    <!-- Grupo 2: Datos del camal -->
+                    <group string="⚖️ Datos del Camal">
+                        <group>
+                            <field name="peso_beneficiado_kg"/>
+                            <field name="costo_servicio_camal"/>
+                            <field name="costo_traslado"/>
+                        </group>
+                        <group string="📊 Resultado del Costeo Automático">
+                            <field name="rendimiento_pct" readonly="1"/>
+                            <field name="costo_total_real" readonly="1"/>
+                            <field name="costo_por_kg" readonly="1"
+                                   help="Este valor actualizará el precio estándar (AVCO) al validar."/>
+                        </group>
+                    </group>
+
+                    <!-- Grupo 3: Ingreso a inventario -->
+                    <group string="📦 Ingreso al Frigorífico">
+                        <group>
+                            <field name="product_id"/>
+                            <field name="warehouse_id"/>
+                        </group>
+                        <group invisible="state != 'validado'">
+                            <field name="stock_picking_id" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <!-- Observaciones -->
+                    <notebook>
+                        <page string="Observaciones">
+                            <field name="observacion"
+                                   placeholder="Ej: Ganado de la finca X, condición buena, camal autorizado SENASA..."/>
+                        </page>
+                        <page string="💬 Historial">
+                            <field name="message_ids" widget="mail_thread"/>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- Vista LISTA (list/tree) de Faenas                         -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <record id="view_carniceria_faena_list" model="ir.ui.view">
+        <field name="name">carniceria.faena.list</field>
+        <field name="model">carniceria.faena</field>
+        <field name="arch" type="xml">
+            <list string="Faenas de Carnicería"
+                  decoration-success="state == 'validado'"
+                  decoration-warning="state == 'confirmado'"
+                  decoration-muted="state == 'borrador'">
+                <field name="name"/>
+                <field name="fecha"/>
+                <field name="proveedor_camal_id"/>
+                <field name="cantidad_cabezas"/>
+                <field name="peso_beneficiado_kg" string="Kg Beneficiados"/>
+                <field name="costo_ganado_total" string="Costo Ganado (S/.)"/>
+                <field name="costo_total_real" string="Costo Total (S/.)" sum="Total S/."/>
+                <field name="costo_por_kg" string="S/. / Kg (AVCO)"/>
+                <field name="rendimiento_pct" string="Rendimiento %"/>
+                <field name="warehouse_id" string="Frigorífico"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'validado'"
+                       decoration-warning="state == 'confirmado'"
+                       decoration-info="state == 'borrador'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- Vista BÚSQUEDA (search) de Faenas                         -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <record id="view_carniceria_faena_search" model="ir.ui.view">
+        <field name="name">carniceria.faena.search</field>
+        <field name="model">carniceria.faena</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="proveedor_camal_id"/>
+                <field name="warehouse_id"/>
+                <!-- Filtros por estado -->
+                <filter name="filter_borrador"   string="Borradores"  domain="[('state','=','borrador')]"/>
+                <filter name="filter_confirmado" string="Confirmadas" domain="[('state','=','confirmado')]"/>
+                <filter name="filter_validado"   string="Validadas"   domain="[('state','=','validado')]"/>
+                <!-- Filtros de período -->
+                <separator/>
+                <filter name="filter_mes" string="Este Mes"
+                        domain="[('fecha','&gt;=', (context_today() + relativedelta(day=1)).strftime('%Y-%m-%d'))]"/>
+                <!-- Agrupaciones -->
+                <separator/>
+                <filter name="group_camal" string="Por Camal"       context="{'group_by':'proveedor_camal_id'}"/>
+                <filter name="group_almacen" string="Por Frigorífico" context="{'group_by':'warehouse_id'}"/>
+                <filter name="group_mes" string="Por Mes"           context="{'group_by':'fecha:month'}"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- Acción de ventana principal para Faenas                   -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <record id="action_carniceria_faena" model="ir.actions.act_window">
+        <field name="name">⚖️ Registro de Faena (Camal)</field>
+        <field name="res_model">carniceria.faena</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                ¡Sin faenas registradas aún!
+            </p>
+            <p>
+                Registra aquí el proceso de beneficio de cada res en el camal.
+                El sistema calculará automáticamente el costo real por kg
+                (incluyendo ganado + camal + traslado) y actualizará
+                el inventario del frigorífico.
+            </p>
+        </field>
+    </record>
+
+</odoo>
