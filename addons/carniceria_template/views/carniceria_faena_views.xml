@@ -67,6 +67,8 @@
                             <field name="peso_beneficiado_kg"/>
                             <field name="costo_servicio_camal"/>
                             <field name="costo_traslado"/>
+                            <field name="costo_flete"/>
+                            <field name="costo_senasa"/>
                         </group>
                         <group string="📊 Resultado del Costeo Automático">
                             <field name="rendimiento_pct" readonly="1"/>

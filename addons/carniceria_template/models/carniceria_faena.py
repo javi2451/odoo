@@ -80,6 +80,16 @@ class CarniceriaFaena(models.Model):
         digits=(10, 2),
         help='Flete: transporte del campo al camal y del camal al frigorífico.',
     )
+    costo_flete = fields.Float(
+        string='Flete (S/.)',
+        digits=(10, 2),
+        help='Costo de flete adicional (transporte de la canal al frigorífico u otro destino).',
+    )
+    costo_senasa = fields.Float(
+        string='SENASA (S/.)',
+        digits=(10, 2),
+        help='Arancel o tarifa cobrada por SENASA por la inspección/habilitación del animal.',
+    )
 
     # ──────────────────────────────────────────────────────────
     # CÁLCULOS AUTOMÁTICOS
@@ -146,6 +156,7 @@ class CarniceriaFaena(models.Model):
     @api.depends(
         'peso_vivo_total_kg', 'peso_beneficiado_kg',
         'costo_ganado_total', 'costo_servicio_camal', 'costo_traslado',
+        'costo_flete', 'costo_senasa',
     )
     def _compute_costos(self):
         for rec in self:
@@ -160,6 +171,8 @@ class CarniceriaFaena(models.Model):
                 rec.costo_ganado_total
                 + rec.costo_servicio_camal
                 + rec.costo_traslado
+                + rec.costo_flete
+                + rec.costo_senasa
             )
 
             # Costo real por kg (clave para AVCO)
