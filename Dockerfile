@@ -15,6 +15,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+# Instalar wkhtmltopdf (Conversor a PDF con soporte para Odoo)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    xfonts-75dpi \
+    xfonts-base \
+    fontconfig \
+    libxrender1 \
+    && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_amd64.deb \
+    && apt-get install -y ./wkhtmltox.deb \
+    && rm wkhtmltox.deb \
+    && rm -rf /var/lib/apt/lists/*
+
 # Crear el usuario odoo
 RUN useradd -m -d /opt/odoo -s /bin/bash odoo
 
